@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useCallback, useState } from "react"
 
 interface RequestObject {
     url: string,
@@ -11,7 +11,7 @@ const useHttp = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false)
 
-    const sendRequest = async (requestObj: RequestObject, applyData: any) => {
+    const sendRequest = useCallback(async(requestObj: RequestObject, applyData: any) => {
         try {
             const response = await fetch(requestObj.url, {
                 method: requestObj.method ? requestObj.method : 'GET',
@@ -28,7 +28,7 @@ const useHttp = () => {
             console.log(err)
         }
         setIsLoading(false)
-    }
+    }, [])
 
     return {
         error,
