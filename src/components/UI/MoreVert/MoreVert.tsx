@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Popper, { PopperPlacementType } from '@mui/material/Popper';
@@ -7,45 +7,44 @@ import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { ClickAwayListener } from '@mui/material';
 
 const MoreVert = () => {
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-    const [open, setOpen] = React.useState(false);
-    const [placement, setPlacement] = React.useState<PopperPlacementType>();
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+    const [open, setOpen] = useState(false);
+    const [placement, setPlacement] = useState<PopperPlacementType>();
 
-    const hideMoreVert = () => {
+    const handleClickAway = () => {
         setOpen(false)
-        return
     }
-
-    useEffect(() => {
-        setTimeout(hideMoreVert, 3500)
-    }, [open])
 
     const handleClick =
         (newPlacement: PopperPlacementType) =>
             (event: React.MouseEvent<HTMLButtonElement>) => {
                 setAnchorEl(event.currentTarget);
-                setOpen((prev) => placement !== newPlacement || !prev);
+                setOpen((prev) => !prev);
                 setPlacement(newPlacement);
             };
 
     return (
-        <IconButton aria-label="settings" onClick={handleClick('right-end')}>
-            <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
-                {({ TransitionProps }) => (
-                    <Fade {...TransitionProps} timeout={350}>
-                        <Paper style={{backgroundColor: "#E8E8E8"}}>
-                            <Typography sx={{ p: 1 }}>
-                                <EditIcon style={{cursor: "pointer", marginRight: "8px" }} />
-                                <DeleteForeverIcon style={{cursor: "pointer"}} color={"error"} />
-                            </Typography>
-                        </Paper>
-                    </Fade>
-                )}
-            </Popper>
-            <MoreVertIcon />
-        </IconButton>
+        <ClickAwayListener onClickAway={handleClickAway}>
+            <IconButton aria-label="settings" onClick={handleClick('right-end')}>
+                <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
+                    {({ TransitionProps }) => (
+                        <Fade {...TransitionProps} timeout={350}>
+                            <Paper>
+                                <Typography sx={{ p: 1 }}>
+                                    <EditIcon style={{ cursor: "pointer", marginRight: "8px" }} />
+                                    <DeleteForeverIcon style={{ cursor: "pointer" }} color={"error"} />
+                                </Typography>
+                            </Paper>
+                        </Fade>
+                    )}
+                </Popper>
+                <MoreVertIcon />
+            </IconButton>
+        </ClickAwayListener>
+
     );
 }
 

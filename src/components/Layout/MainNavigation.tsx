@@ -14,12 +14,12 @@ const MainHeader = () => {
                 <ul>
                     <li>
                         <NavLink to='/records-overview' className={path === '/records-overview' || path === '/' ? classes.active : ""}>
-                            Products
+                            Overview
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to='/add-records' className={path === '/add-records' ? classes.active : ""}>
-                            Welcome
+                            Add Records
                         </NavLink>
                     </li>
                 </ul>

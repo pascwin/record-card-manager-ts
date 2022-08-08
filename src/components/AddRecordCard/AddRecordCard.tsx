@@ -3,6 +3,7 @@ import Card from '../UI/Card/Card';
 import TextArea from '../UI/TextArea/TextArea';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import CustomButton from '../UI/Button/Button';
 
 
 
@@ -16,9 +17,7 @@ const AddRecordCard = () => {
                     <TextArea name="Answer" />
                 </div>
                 <div className={classes.actions}>
-                    <Button style={{backgroundColor: "magenta"}} variant="contained" startIcon={<SendIcon />}>
-                        Send
-                    </Button>
+                    <CustomButton title="send" color="#044599" icon={<SendIcon />} variant="contained" margin='20px'/>
                 </div>
             </form>
         </Card>

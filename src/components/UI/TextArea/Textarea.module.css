@@ -27,8 +27,8 @@
   
   .control textarea:focus {
     outline: none;
-    border-color: #4f005f;
-    background: #f6dbfc;
+    border-color: #044599;
+    background: #95bcf0;
   }
   
   .control.invalid textarea {
