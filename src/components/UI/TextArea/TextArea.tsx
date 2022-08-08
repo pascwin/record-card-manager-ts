@@ -1,6 +1,6 @@
 import classes from "./Textarea.module.css"
 
-const TextArea = (props: any) => {
+const TextArea = (props:any) => {
     return (
         <div className={classes.control}>
         <label>{props.name}</label>

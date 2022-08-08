@@ -35,7 +35,7 @@ const MoreVert = () => {
             <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
                 {({ TransitionProps }) => (
                     <Fade {...TransitionProps} timeout={350}>
-                        <Paper>
+                        <Paper style={{backgroundColor: "#E8E8E8"}}>
                             <Typography sx={{ p: 1 }}>
                                 <EditIcon style={{cursor: "pointer", marginRight: "8px" }} />
                                 <DeleteForeverIcon style={{cursor: "pointer"}} color={"error"} />

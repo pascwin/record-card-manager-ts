@@ -1,27 +1,28 @@
 import classes from './AddRecordCardForm.module.css';
 import Card from '../UI/Card/Card';
 import TextArea from '../UI/TextArea/TextArea';
-import { Button } from '@mui/material';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
 
 
 
 
-const AddRecordCardForm = () => {
+const AddRecordCard = () => {
     return (
-            <Card>
-                <form>
-                    <div className={classes["textarea-container"]}>
-                        <TextArea name="Question"/>
-                        <TextArea name="Answer"/>
-                    </div>
-                    <div className={classes.actions}>
-                        <Button type="submit" className={classes.btn}>
-                            Add Card
-                        </Button>
-                    </div>
-                </form>
-            </Card>
+        <Card className={classes.formContainer}>
+            <form>
+                <div className={classes["textarea-container"]}>
+                    <TextArea name="Question" />
+                    <TextArea name="Answer" />
+                </div>
+                <div className={classes.actions}>
+                    <Button style={{backgroundColor: "magenta"}} variant="contained" startIcon={<SendIcon />}>
+                        Send
+                    </Button>
+                </div>
+            </form>
+        </Card>
     );
 };
 
-export default AddRecordCardForm;
+export default AddRecordCard;
