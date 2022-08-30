@@ -13,6 +13,7 @@ const CustomButton = (props: any) => {
     return (
         <ThemeProvider theme={theme}>
             <Button
+                onClick={props.onClickFunction}
                 color="primary"
                 variant={props.variant}
                 style={{ margin: props.margin, padding: props.padding }}
