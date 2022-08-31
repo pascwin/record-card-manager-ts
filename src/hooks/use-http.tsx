@@ -4,14 +4,15 @@ interface RequestObject {
     url: string,
     method: string | undefined,
     headers: {},
-    body: string | undefined
+    body: any,
 }
 
 const useHttp = () => {
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false)
 
     const sendRequest = useCallback(async(requestObj: RequestObject, applyData: any) => {
+        setIsLoading(true)
         try {
             const response = await fetch(requestObj.url, {
                 method: requestObj.method ? requestObj.method : 'GET',
