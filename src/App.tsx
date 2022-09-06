@@ -1,8 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
-import AddRecordCardsPage from './pages/AddRecordCardsPage';
 
+import AddRecordCardsPage from './pages/AddRecordCardsPage';
 import RecordCardsOverviewPage from './pages/RecordCardsOverviewPage';
 import RecordCardProvider from './store/RecordCardProvider';
+import DemoComponent from './DemoComponent';
 
 function App() {
   
@@ -13,6 +14,7 @@ function App() {
         <Route path="/records-overview" element={<RecordCardsOverviewPage />} />
         <Route path="/add-records" element={<AddRecordCardsPage />} />
       </Routes>
+      <DemoComponent />
     </RecordCardProvider>
   );
 }

@@ -12,6 +12,7 @@ const RecordCardsOverview = () => {
     const transformRecordCards = useCallback((data: any) => {
         const transformedRecordCards = [];
         for (const cardKey in data) {
+            console.log(cardKey)
             transformedRecordCards.push({
                 id: cardKey,
                 category: data[cardKey].category,
@@ -21,12 +22,11 @@ const RecordCardsOverview = () => {
             })
         }
         setRecordCards(transformedRecordCards)
+        console.log(recordCardCtx.items.items)
         if(!recordCardCtx.items.items) {
             recordCardCtx.allRecordCards(transformedRecordCards)
         }
     }, [recordCardCtx])
-
-    console.log(recordCardCtx.items)
 
     useEffect(() => {
         sendRequest({

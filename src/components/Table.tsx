@@ -8,8 +8,26 @@ import MoreVert from './UI/MoreVert/MoreVert';
   
 
 const BasicTable = (props: any) => {
-
     const { items } = props
+
+    const deleteRecordCardHandler = async(id: any) => {
+        const requestBody = {
+            id: id
+        }
+        try {
+            const response = await fetch(`https://http-record-cards-default-rtdb.europe-west1.firebasedatabase.app/record-cards/${id}.json`, {
+                method: "DELETE",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody),
+            })
+            if (!response.ok) {
+                console.log(response)
+                throw new Error("something went wrong");
+            }
+        } catch(err) {
+            console.log(err)
+        }
+    }
 
     return (
         <TableContainer component={Paper}>
@@ -33,7 +51,7 @@ const BasicTable = (props: any) => {
                             <TableCell>{item.answer}</TableCell>
                             <TableCell align="center">{item.category}</TableCell>
                             <TableCell align="center">{item.stage}</TableCell>
-                            <TableCell align="center"><MoreVert /></TableCell>
+                            <TableCell align="center"><MoreVert deleteFunction={deleteRecordCardHandler} id={item.id} /></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
