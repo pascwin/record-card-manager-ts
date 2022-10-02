@@ -1,9 +1,10 @@
-import { Fragment, useCallback, useEffect, useState, useContext } from 'react';
+import { useCallback, useEffect, useState, useContext } from 'react';
 import useHttp from '../../hooks/use-http';
-import RecordCardContext from '../../store/record-card-context';
-import BasicTable from '../Table';
+import RecordCardContext from '../../contexts/record-card-context';
+import BasicTable from '../../pages/OverviewRecordCards/Table/Table';
+import Layout from '../../components/Layout/Layout';
 
-const RecordCardsOverview = () => {
+const OverviewRecordCards = () => {
     const [recordCards, setRecordCards] = useState<any>()
     const recordCardCtx = useContext<any>(RecordCardContext)
 
@@ -52,10 +53,10 @@ const RecordCardsOverview = () => {
     }
 
     return (
-        <Fragment>
+        <Layout>
             {content}
-        </Fragment>
+        </Layout>
     );
 }
 
-export default RecordCardsOverview;
+export default OverviewRecordCards;

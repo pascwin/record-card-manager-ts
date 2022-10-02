@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 
 import classes from './AddRecordCardForm.module.css';
-import Card from '../UI/Card/Card';
-import TextArea from '../UI/TextArea/TextArea';
+import Card from '../../../components/Card/Card';
+import TextArea from '../../../components/TextArea/TextArea';
 import SendIcon from '@mui/icons-material/Send';
-import CustomButton from '../UI/Button/Button';
-import useHttp from '../../hooks/use-http';
+import CustomButton from '../../../components/Button/Button';
+import useHttp from '../../../hooks/use-http';
 
-const AddRecordCard = () => {
+const AddRecordCardForm = () => {
     const questionInputRef = useRef<HTMLTextAreaElement>(null)
     const answerInputRef = useRef<HTMLTextAreaElement>(null)
     const { error, isLoading, sendRequest } = useHttp()
@@ -67,4 +67,4 @@ const AddRecordCard = () => {
     );
 };
 
-export default AddRecordCard;
+export default AddRecordCardForm;

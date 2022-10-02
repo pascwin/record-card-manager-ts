@@ -4,7 +4,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import { Paper, TableRow } from '@mui/material';
-import MoreVert from './UI/MoreVert/MoreVert';
+import MoreVert from '../../../components/MoreVert/MoreVert';
   
 
 const BasicTable = (props: any) => {

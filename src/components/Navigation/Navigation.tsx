@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-import classes from './MainNavigation.module.css';
+import classes from './Navigation.module.css';
 
 
 const MainHeader = () => {

@@ -1,18 +1,19 @@
 import { Routes, Route } from 'react-router-dom';
 
-import AddRecordCardsPage from './pages/AddRecordCardsPage';
-import RecordCardsOverviewPage from './pages/RecordCardsOverviewPage';
-import RecordCardProvider from './store/RecordCardProvider';
+import RecordCardProvider from './contexts/RecordCardProvider';
 import DemoComponent from './DemoComponent';
+import AddRecordCards from './pages/AddRecordCards';
+import OverviewRecordCards from './pages/OverviewRecordCards';
+
 
 function App() {
   
   return (
     <RecordCardProvider>
       <Routes>
-        <Route path="/" element={<RecordCardsOverviewPage />} />
-        <Route path="/records-overview" element={<RecordCardsOverviewPage />} />
-        <Route path="/add-records" element={<AddRecordCardsPage />} />
+        <Route path="/" element={<OverviewRecordCards />} />
+        <Route path="/records-overview" element={<OverviewRecordCards />} />
+        <Route path="/add-records" element={<AddRecordCards />} />
       </Routes>
       <DemoComponent />
     </RecordCardProvider>
