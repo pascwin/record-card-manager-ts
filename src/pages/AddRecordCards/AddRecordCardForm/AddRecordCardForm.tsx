@@ -1,54 +1,39 @@
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
+import SendIcon from '@mui/icons-material/Send';
 
 import classes from './AddRecordCardForm.module.css';
 import Card from '../../../components/Card/Card';
 import TextArea from '../../../components/TextArea/TextArea';
-import SendIcon from '@mui/icons-material/Send';
 import CustomButton from '../../../components/Button/Button';
-import useHttp from '../../../hooks/use-http';
+
+import { createRecordCard } from '../../../utils/firebase.utils';
+import { RecordCardContext } from '../../../contexts/record-card-context';
 
 const AddRecordCardForm = () => {
     const questionInputRef = useRef<HTMLTextAreaElement>(null)
     const answerInputRef = useRef<HTMLTextAreaElement>(null)
-    const { error, isLoading, sendRequest } = useHttp()
+    const {setRecordCards} = useContext(RecordCardContext)
 
-    const requestOkHandler = (data: any) => {
-        if (questionInputRef.current && answerInputRef.current && data) {
+    const submitRecordCardHandler = async() => {
+        const newRecordCard = {
+            question: questionInputRef.current?.value,
+            answer: answerInputRef.current?.value,
+            category: "spanish",
+            stage: "1",
+        }
+        createRecordCard(newRecordCard)
+        setRecordCards((prevState: any) => {
+            return [...prevState, newRecordCard]
+        })
+        if (questionInputRef.current && answerInputRef.current) {
             questionInputRef.current.value = ''
             answerInputRef.current.value = ''
         }
     }
 
-    const submitRecordCardHandler = (event: any) => {
-        event.preventDefault()
-        const requestBody = {
-            answer: questionInputRef.current?.value,
-            question: answerInputRef.current?.value,
-            id: Math.random(),
-            category: "spanish",
-            stage: "1",
-        }
-        sendRequest({
-            url: 'https://http-record-cards-default-rtdb.europe-west1.firebasedatabase.app/record-cards.json',
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: requestBody
-        }, requestOkHandler)
-    }
-
-    let content
-
-    if (isLoading) {
-        content = <p>is Loading...</p>
-    }
-
-    if (error) {
-        content = <p>an error occured</p>
-    }
-
-    if (!isLoading && !error) {
-        content = (
-            <form>
+    return (
+        <Card className={classes.formContainer}>
+               <form>
                 <div className={classes["textarea-container"]}>
                     <TextArea name="Question" inputRef={questionInputRef}/>
                     <TextArea name="Answer" inputRef={answerInputRef}/>
@@ -57,12 +42,6 @@ const AddRecordCardForm = () => {
                     <CustomButton onClickFunction={submitRecordCardHandler} title="send" color="#044599" icon={<SendIcon />} variant="contained" margin='20px'/>
                 </div>
             </form>
-        )
-    }
-
-    return (
-        <Card className={classes.formContainer}>
-            {content}
         </Card>
     );
 };

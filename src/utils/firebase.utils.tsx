@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, addDoc, doc } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -28,3 +28,8 @@ export const getRecordCards = async () => {
   });
   return cards;
 };
+
+export const createRecordCard = async(cardObject: any) => {
+  await addDoc(collection(db, "record-cards"), cardObject)
+  return cardObject;
+}

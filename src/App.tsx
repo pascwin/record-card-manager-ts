@@ -1,11 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import { getRecordCards } from "./utils/firebase.utils";
 
 import AddRecordCards from "./pages/AddRecordCards";
 import OverviewRecordCards from "./pages/OverviewRecordCards";
 
 const App = () => {
-  getRecordCards();
   return (
       <Routes>
         <Route path="/" element={<OverviewRecordCards />} />

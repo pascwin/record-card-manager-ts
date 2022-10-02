@@ -44,7 +44,7 @@ const BasicTable = (props: any) => {
                 <TableBody>
                     {items?.map((item: any) => (
                         <TableRow
-                            key={item.id}
+                            key={item.answer}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell>{item.question}</TableCell>
