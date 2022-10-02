@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, addDoc, doc } from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -30,6 +30,11 @@ export const getRecordCards = async () => {
 };
 
 export const createRecordCard = async(cardObject: any) => {
-  await addDoc(collection(db, "record-cards"), cardObject)
-  return cardObject;
+  await setDoc(doc(db, "record-cards", cardObject.id), cardObject)
+}
+//setDocs, when adding a element with a specific id or key --> three parameters --> also doc() not collection
+//addDocs, for generating a elementing with key --> two parameters --> also collection() not doc()
+
+export const deleteRecordCard = async(id: string) => {
+  await deleteDoc(doc(db, "record-cards", id))
 }

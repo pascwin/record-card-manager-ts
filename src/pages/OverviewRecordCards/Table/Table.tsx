@@ -5,30 +5,20 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import { Paper, TableRow } from '@mui/material';
 import MoreVert from '../../../components/MoreVert/MoreVert';
+import { deleteRecordCard } from '../../../utils/firebase.utils';
   
 
 const BasicTable = (props: any) => {
-    const { items } = props
+    const { cards, setCards } = props
 
-    const deleteRecordCardHandler = async(id: any) => {
-        const requestBody = {
-            id: id
-        }
-        try {
-            const response = await fetch(`https://http-record-cards-default-rtdb.europe-west1.firebasedatabase.app/record-cards/${id}.json`, {
-                method: "DELETE",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody),
-            })
-            if (!response.ok) {
-                console.log(response)
-                throw new Error("something went wrong");
-            }
-        } catch(err) {
-            console.log(err)
-        }
+    const deleteRecordCardHandler = async(id: string) => {
+        await deleteRecordCard(id)
+        const newRecordCards = cards.filter((cards: any) => {
+            return cards.id !== id
+        })
+        setCards(newRecordCards)
     }
-
+ 
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -42,16 +32,16 @@ const BasicTable = (props: any) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {items?.map((item: any) => (
+                    {cards?.map((card: any) => (
                         <TableRow
-                            key={item.answer}
+                            key={card.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                            <TableCell>{item.question}</TableCell>
-                            <TableCell>{item.answer}</TableCell>
-                            <TableCell align="center">{item.category}</TableCell>
-                            <TableCell align="center">{item.stage}</TableCell>
-                            <TableCell align="center"><MoreVert deleteFunction={deleteRecordCardHandler} id={item.id} /></TableCell>
+                            <TableCell>{card.question}</TableCell>
+                            <TableCell>{card.answer}</TableCell>
+                            <TableCell align="center">{card.category}</TableCell>
+                            <TableCell align="center">{card.stage}</TableCell>
+                            <TableCell align="center"><MoreVert deleteFunction={deleteRecordCardHandler} id={card.id} /></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

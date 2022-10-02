@@ -16,6 +16,7 @@ const AddRecordCardForm = () => {
 
     const submitRecordCardHandler = async() => {
         const newRecordCard = {
+            id: String(Math.random()),
             question: questionInputRef.current?.value,
             answer: answerInputRef.current?.value,
             category: "spanish",
