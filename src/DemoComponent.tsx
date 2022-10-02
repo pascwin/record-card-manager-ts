@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 const DemoComponent = () => {
-    const demoRef = useRef<HTMLInputElement>(null);
+    // const demoRef = useRef<HTMLInputElement>(null);
 
     const deleteRecordCardHandler = async () => {
         const requestBody = {

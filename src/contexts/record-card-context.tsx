@@ -1,13 +1,30 @@
-import React from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { getRecordCards } from "../utils/firebase.utils";
 
-const RecordCardContext: any = React.createContext({
-    items: [],
-    itemToEdit: undefined,
-    allRecordCards: (items: any) => { },
-//     addItem: (item: any) => {},
-//     removeItem: (id: string) => {},
-//     editItem: (id: string) => {},
-//     updateItem: (item: any) => {},
-})
+export const RecordCardContext = createContext<any>({
+  cards: [],
+});
 
-export default RecordCardContext;
+type RecordCardProviderProps = {
+  children: ReactNode;
+};
+
+export const RecordCardProvider = ({ children }: RecordCardProviderProps) => {
+  const [recordCards, setRecordCards] = useState<any>();
+
+  const value = {recordCards, setRecordCards}
+
+  useEffect(() => {
+    const getAllRecordCards = async () => {
+      const cards = await getRecordCards();
+      setRecordCards(cards)
+    };
+    getAllRecordCards()
+  }, []);
+
+  return (
+    <RecordCardContext.Provider value={value}>
+      {children}
+    </RecordCardContext.Provider>
+  );
+};
