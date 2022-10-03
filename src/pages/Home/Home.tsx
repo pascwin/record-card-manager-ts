@@ -11,7 +11,10 @@ const Home = () => {
         <Layout>
             <div className="home-container">
                 <h1>Record Card Manager</h1>
-                {!isLoggedIn && <Link to="/authentication"><button>Sign in!</button></Link>}
+                {!isLoggedIn ? <Link to="/authentication"><button>Sign in!</button></Link>
+                :
+                <h2>Welcome to your Workspace!</h2>
+                }
             </div>
         </Layout>
     )

@@ -29,7 +29,7 @@ const SignInForm = () => {
       await signInAuthUserWithEmailAndPassword(email, password);
       resetFormFields();
       setIsLoggedIn(true);
-      navigate("/records-overview")
+      navigate("/")
       console.log(currentUser)
     } catch (error: any) {
       console.log(error);

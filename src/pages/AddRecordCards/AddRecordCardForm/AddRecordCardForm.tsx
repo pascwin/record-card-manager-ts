@@ -8,11 +8,13 @@ import CustomButton from '../../../components/Button/Button';
 
 import { createRecordCard } from '../../../utils/firebase.utils';
 import { RecordCardContext } from '../../../contexts/record-card-context';
+import { UserContext } from '../../../contexts/user-context';
 
 const AddRecordCardForm = () => {
     const questionInputRef = useRef<HTMLTextAreaElement>(null)
     const answerInputRef = useRef<HTMLTextAreaElement>(null)
     const {setRecordCards} = useContext(RecordCardContext)
+    const {currentUser} = useContext(UserContext)
 
     const submitRecordCardHandler = async() => {
         const newRecordCard = {
@@ -22,7 +24,7 @@ const AddRecordCardForm = () => {
             category: "spanish",
             stage: "1",
         }
-        createRecordCard(newRecordCard)
+        createRecordCard(newRecordCard, currentUser.uid)
         setRecordCards((prevState: any) => {
             return [...prevState, newRecordCard]
         })

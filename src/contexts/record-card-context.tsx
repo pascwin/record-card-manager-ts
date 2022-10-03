@@ -1,5 +1,12 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { getRecordCards } from "../utils/firebase.utils";
+import { UserContext } from "./user-context";
 
 export const RecordCardContext = createContext<any>({
   cards: [],
@@ -11,16 +18,19 @@ type RecordCardProviderProps = {
 
 export const RecordCardProvider = ({ children }: RecordCardProviderProps) => {
   const [recordCards, setRecordCards] = useState<any>();
+  const { currentUser } = useContext(UserContext);
 
-  const value = {recordCards, setRecordCards}
+  const value = { recordCards, setRecordCards };
 
   useEffect(() => {
     const getAllRecordCards = async () => {
-      const cards = await getRecordCards();
-      setRecordCards(cards)
+      const cards = await getRecordCards(currentUser.uid);
+      setRecordCards(cards);
     };
-    getAllRecordCards()
-  }, []);
+    if (currentUser) {
+      getAllRecordCards();
+    }
+  }, [currentUser]);
 
   return (
     <RecordCardContext.Provider value={value}>

@@ -9,10 +9,10 @@ import { deleteRecordCard } from '../../../utils/firebase.utils';
   
 
 const BasicTable = (props: any) => {
-    const { cards, setCards } = props
+    const { cards, setCards, userId } = props
 
     const deleteRecordCardHandler = async(id: string) => {
-        await deleteRecordCard(id)
+        await deleteRecordCard(id, userId)
         const newRecordCards = cards.filter((cards: any) => {
             return cards.id !== id
         })

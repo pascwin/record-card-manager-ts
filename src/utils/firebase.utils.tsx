@@ -37,8 +37,8 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
-export const getRecordCards = async () => {
-  const cardsRef = collection(db, "record-cards");
+export const getRecordCards = async (uid: string) => {
+  const cardsRef = collection(db, uid)
   const cardsSnapshot = await getDocs(cardsRef);
   const cards = cardsSnapshot.docs.map((card) => {
     return card.data();
@@ -46,14 +46,14 @@ export const getRecordCards = async () => {
   return cards;
 };
 
-export const createRecordCard = async (cardObject: any) => {
-  await setDoc(doc(db, "record-cards", cardObject.id), cardObject);
+export const createRecordCard = async (cardObject: any, uid: string) => {
+  await setDoc(doc(db, uid, cardObject.id), cardObject);
 };
 //setDocs, when adding a element with a specific id or key --> three parameters --> also doc() not collection
 //addDocs, for generating a elementing with key --> two parameters --> also collection() not doc()
 
-export const deleteRecordCard = async (id: string) => {
-  await deleteDoc(doc(db, "record-cards", id));
+export const deleteRecordCard = async (id: string, uid: string) => {
+  await deleteDoc(doc(db, uid, id));
 };
 
 export const auth = getAuth();
