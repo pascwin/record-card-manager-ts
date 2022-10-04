@@ -29,6 +29,16 @@ const MainHeader = () => {
                             Add Records
                         </NavLink>
                     </li>}
+                    {isLoggedIn && <li>
+                        <NavLink to='/categories' className={path === '/categories' ? classes.active : ""}>
+                            Categories
+                        </NavLink>
+                    </li>}
+                    {!isLoggedIn && <li>
+                        <NavLink to='/authentication' className={path === '/authentication' ? classes.active : ""}>
+                            Sign In
+                        </NavLink>
+                    </li>}
                 </ul>
             </nav>
         </header>

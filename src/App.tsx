@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import AddRecordCards from "./pages/AddRecordCards";
 import OverviewRecordCards from "./pages/OverviewRecordCards";
+import Categories from "./pages/Categories/Categories";
 import Authentication from "./pages/Authentication/Authentication";
 import Home from "./pages/Home/Home";
 
@@ -16,6 +17,7 @@ const App = () => {
       <Route path="/home" element={<Home />} />
       {isLoggedIn && <Route path="/records-overview" element={<OverviewRecordCards />} />}
       {isLoggedIn &&<Route path="/add-records" element={<AddRecordCards />} />}
+      {isLoggedIn &&<Route path="/categories" element={<Categories />} />}
       {!isLoggedIn && <Route path="/authentication" element={<Authentication />} />}
     </Routes>
   );

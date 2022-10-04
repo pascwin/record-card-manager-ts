@@ -38,7 +38,7 @@ const db = getFirestore(app);
 
 
 export const getRecordCards = async (uid: string) => {
-  const cardsRef = collection(db, uid)
+  const cardsRef = collection(db, "record-cards-" + uid)
   const cardsSnapshot = await getDocs(cardsRef);
   const cards = cardsSnapshot.docs.map((card) => {
     return card.data();
@@ -47,13 +47,30 @@ export const getRecordCards = async (uid: string) => {
 };
 
 export const createRecordCard = async (cardObject: any, uid: string) => {
-  await setDoc(doc(db, uid, cardObject.id), cardObject);
+  await setDoc(doc(db, "record-cards-" + uid, cardObject.id), cardObject);
 };
 //setDocs, when adding a element with a specific id or key --> three parameters --> also doc() not collection
 //addDocs, for generating a elementing with key --> two parameters --> also collection() not doc()
 
 export const deleteRecordCard = async (id: string, uid: string) => {
-  await deleteDoc(doc(db, uid, id));
+  await deleteDoc(doc(db, "record-cards-" + uid, id));
+};
+
+export const getCategories = async (uid: string) => {
+  const categoriesRef = collection(db, "categories-" + uid)
+  const categoriesSnapshot = await getDocs(categoriesRef);
+  const categories = categoriesSnapshot.docs.map((category) => {
+    return category.data();
+  });
+  return categories;
+};
+
+export const createCategory = async (categoryObject: any, uid: string) => {
+  await setDoc(doc(db, "categories-" + uid, categoryObject.id), categoryObject);
+};
+
+export const deleteCategory = async (id: string, uid: string) => {
+  await deleteDoc(doc(db, "categories-" + uid, id));
 };
 
 export const auth = getAuth();
