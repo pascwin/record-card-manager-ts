@@ -1,23 +1,18 @@
-import {useContext } from "react"
-import { UserContext } from "../../contexts/user-context";
-import { Link } from "react-router-dom";
-import Layout from "../../components/Layout/Layout";
-import "./Home.scss"
-
+import "./Home.scss";
+import CategoriesForm from "./categories-form/CategoriesForm";
+import CategoriesList from "./categories-list/CategoriesList";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Home = () => {
-    const {isLoggedIn} = useContext(UserContext)
-    return (
-        <Layout>
-            <div className="home-container">
-                <h1>Record Card Manager</h1>
-                {!isLoggedIn ? <Link to="/authentication"><button>Sign in!</button></Link>
-                :
-                <h2>Welcome to your Workspace!</h2>
-                }
-            </div>
-        </Layout>
-    )
-}
+  const { user } = useAuthContext();
+  console.log(user.uid)
+  return (
+    <div className="home-container">
+      <h1>Record Card Manager</h1>
+      <CategoriesForm uid={user.uid} />
+      <CategoriesList uid={user.uid} />
+    </div>
+  );
+};
 
 export default Home;

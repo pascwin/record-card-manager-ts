@@ -1,25 +1,31 @@
-import { useContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext";
+import { Fragment } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import AddRecordCards from "./pages/AddRecordCards";
-import OverviewRecordCards from "./pages/OverviewRecordCards";
-import Categories from "./pages/Categories/Categories";
-import Authentication from "./pages/Authentication/Authentication";
-import Home from "./pages/Home/Home";
+//components
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import Signup from "./pages/signup/Signup";
 
-import { UserContext } from "./contexts/user-context";
+// import { UserContext } from "./contexts/user-context";
 
 const App = () => {
-  const {isLoggedIn} = useContext(UserContext)
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/home" element={<Home />} />
-      {isLoggedIn && <Route path="/records-overview" element={<OverviewRecordCards />} />}
-      {isLoggedIn &&<Route path="/add-records" element={<AddRecordCards />} />}
-      {isLoggedIn &&<Route path="/categories" element={<Categories />} />}
-      {!isLoggedIn && <Route path="/authentication" element={<Authentication />} />}
-    </Routes>
+    const { authIsReady, user } = useAuthContext()
+    return (
+      <div className="App">
+        {authIsReady && (
+          <Fragment>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
+              <Route path="/home" element={user ? <Home /> : <Navigate to="/login" />} />
+              <Route path="/login" element={!user ? <Login /> : <Navigate to="/home" />} />
+              <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/home" />} />
+            </Routes>
+          </Fragment>
+        )}
+      </div>
   );
 };
 
