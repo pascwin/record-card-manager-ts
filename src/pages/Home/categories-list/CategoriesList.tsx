@@ -1,4 +1,5 @@
 import { useCollection } from "../../../hooks/useCollection";
+import { NavLink } from "react-router-dom";
 
 const CategoriesList = ({ uid }: any) => {
   const { documents } = useCollection("categories", ["uid", "==", uid], []);
@@ -10,6 +11,7 @@ const CategoriesList = ({ uid }: any) => {
         return (
           <div>
             <p>{document.name}</p>
+            <NavLink to={`/category/${document.name}`}>here</NavLink>
           </div>
         );
       })}
