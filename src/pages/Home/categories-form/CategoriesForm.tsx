@@ -17,7 +17,7 @@ const CategoriesForm = ({ uid }: any) => {
   return (
     <div>
       <form>
-        <input name="Answer" ref={category} />
+        <input ref={category} />
         <button onClick={addCategoryHandler}>Click me!</button>
       </form>
     </div>

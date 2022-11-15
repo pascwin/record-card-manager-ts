@@ -9,7 +9,7 @@ const CategoriesList = ({ uid }: any) => {
       <h1>Categories List</h1>
       {documents.map((document: any) => {
         return (
-          <div>
+          <div key={document.name}>
             <p>{document.name}</p>
             <NavLink to={`/category/${document.name}`}>here</NavLink>
           </div>
