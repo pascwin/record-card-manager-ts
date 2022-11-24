@@ -22,7 +22,6 @@ export const useCollection = (
 
   useEffect(() => {
     let ref: any = collection(db, table);
-    console.log(...q);
 
     if (q && !q2) {
       ref = query(ref, where(q[0], q[1], q[2]));
