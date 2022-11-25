@@ -1,18 +1,16 @@
 import { useRef } from "react";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../firebase/config";
+import { useFirestore } from "../../../hooks/useFirestore";
 
 const RecordsLearnForm = ({ record, getToday }: any) => {
   const answer = useRef<HTMLInputElement>(null);
-  const recordRef = doc(db, "records", record.id);
+  const { updateDocument } = useFirestore("records");
 
-  const checkAnswerHandler = async() => {
+  const checkAnswerHandler = async () => {
     if (answer.current?.value === record.answer) {
-      console.log("you are right!");
-      await updateDoc(recordRef, {
+      updateDocument(record.id, {
         stage: record.stage + 1,
-        lastRepeat: getToday()
-      })
+        lastRepeat: getToday(),
+      });
     }
   };
 

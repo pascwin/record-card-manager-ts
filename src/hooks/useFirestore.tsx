@@ -2,7 +2,7 @@ import { useReducer, useEffect, useState } from "react";
 
 //firebase
 import { db, timestamp } from "../firebase/config";
-import { collection, setDoc, doc } from "firebase/firestore";
+import { collection, setDoc, doc, updateDoc } from "firebase/firestore";
 
 let initialState = {
   document: null,
@@ -47,6 +47,35 @@ export const useFirestore = (table: any) => {
     }
   };
 
+  const addDocument = async (document: any) => {
+    dispatch({ type: "IS_PENDING" });
+    try {
+      const docRef = collection(db, table);
+      const createdAt = timestamp.fromDate(new Date());
+      const id = String(Math.random());
+      const addedDocument = await setDoc(doc(docRef, id), {
+        ...document,
+        createdAt,
+        id,
+      });
+      dispatchIfNotCancelled({
+        type: "ADDED_DOCUMENT",
+        payload: addedDocument,
+      });
+    } catch (err: any) {
+      dispatchIfNotCancelled({ type: "ERROR", payload: err.message });
+    }
+  };
+
+  const updateDocument = async (id: any, updates: any) => {
+    try {
+      const docRef = doc(db, table, id);
+      await updateDoc(docRef, updates);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
   // add document alternative
   // const addDocument = async (doc: any) => {
   //   dispatch({ type: "IS_PENDING" });
@@ -66,26 +95,6 @@ export const useFirestore = (table: any) => {
   //   }
   // };
 
-  const addDocument = async(document:any) => {
-    dispatch({ type: "IS_PENDING" });
-    try {
-      const docRef = collection(db, table)
-      const createdAt = timestamp.fromDate(new Date());
-      const id = String(Math.random())
-      const addedDocument = await setDoc(doc(docRef, id), {
-        ...document,
-        createdAt,
-        id,
-      })
-      dispatchIfNotCancelled({
-        type: "ADDED_DOCUMENT",
-        payload: addedDocument,
-      });
-    } catch (err: any) {
-      dispatchIfNotCancelled({ type: "ERROR", payload: err.message });
-    }
-  }
-
   //delete document
   // const deleteDocument = async (id: any) => {
   //     dispatch({ type: "IS_PENDING" })
@@ -103,5 +112,5 @@ export const useFirestore = (table: any) => {
     };
   }, []);
 
-  return { addDocument, response };
+  return { addDocument, updateDocument, response };
 };

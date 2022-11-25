@@ -38,7 +38,7 @@ const Category = () => {
 
   const checkIfToLearnRecord = useCallback((record: any) => {
     const today = new Date(getToday());
-    if (record.stage === "1") {
+    if (record.stage === 1) {
       return true;
     } else if (record.stage === 2 && addDays(record.lastRepeat, 3) < today) {
       return true;
