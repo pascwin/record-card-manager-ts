@@ -97,7 +97,7 @@ const Category = () => {
       </div>
       <br></br>
       <div>
-        {recordsToLearn[0] &&<RecordsLearnForm record={recordsToLearn[0]} />}
+        {recordsToLearn[0] && <RecordsLearnForm record={recordsToLearn[0]} />}
       </div>
     </Fragment>
   );
