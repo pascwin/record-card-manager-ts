@@ -40,7 +40,7 @@ const Category = () => {
     const today = new Date(getToday());
     if (record.stage === "1") {
       return true;
-    } else if (record.stage === "2" && addDays(record.lastRepeat, 3) < today) {
+    } else if (record.stage === 2 && addDays(record.lastRepeat, 3) < today) {
       return true;
     } else if (record.stage === "3" && addDays(record.lastRepeat, 7) < today) {
       return true;
@@ -75,7 +75,7 @@ const Category = () => {
       category: location.pathname.slice(10),
       answer: answer.current?.value,
       question: question.current?.value,
-      stage: "1",
+      stage: 1,
       lastRepeat: null,
     });
   };
@@ -97,7 +97,7 @@ const Category = () => {
       </div>
       <br></br>
       <div>
-        {recordsToLearn[0] && <RecordsLearnForm record={recordsToLearn[0]} />}
+        {recordsToLearn[0] && <RecordsLearnForm record={recordsToLearn[0]} getToday={getToday}/>}
       </div>
     </Fragment>
   );

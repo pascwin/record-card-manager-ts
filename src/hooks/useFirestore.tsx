@@ -77,7 +77,6 @@ export const useFirestore = (table: any) => {
         createdAt,
         id,
       })
-      console.log(addedDocument);
       dispatchIfNotCancelled({
         type: "ADDED_DOCUMENT",
         payload: addedDocument,
