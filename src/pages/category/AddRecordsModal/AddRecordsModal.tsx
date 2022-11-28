@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { useFirestore } from "../../../hooks/useFirestore";
-import "./AddRecordsForm.scss"
+import "./AddRecordsModal.scss"
 
 const AddRecordsForm = ({ open, setOpen, uid }: any) => {
   const question = useRef<HTMLInputElement>(null);
@@ -33,7 +33,7 @@ const AddRecordsForm = ({ open, setOpen, uid }: any) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>Add Records</Button>
       <Modal
         open={open}
         onClose={handleClose}

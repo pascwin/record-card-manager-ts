@@ -3,8 +3,8 @@ import { Fragment, useState, useEffect, useCallback } from "react";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import RecordsTable from "../RecordsTable/RecordsTable";
 import { useCollection } from "../../../hooks/useCollection";
-import RecordsLearnForm from "../RecordsLearnForm/RecordsLearnForm";
-import AddRecordsForm from "../AddRecordsForm/AddRecordsForm";
+import RecordsLearnForm from "../RecordsLearnModal/RecordsLearnModal";
+import AddRecordsForm from "../AddRecordsModal/AddRecordsModal";
 
 const Category = () => {
   const [learnCount, setLearnCount] = useState(0);
@@ -38,15 +38,15 @@ const Category = () => {
     const today = new Date(getToday());
     if (record.stage === 1) {
       return true;
-    } else if (record.stage === 2 && addDays(record.lastRepeat, 3) < today) {
+    } else if (record.stage === 2 && addDays(record.lastRepeat, 3) <= today) {
       return true;
-    } else if (record.stage === "3" && addDays(record.lastRepeat, 7) < today) {
+    } else if (record.stage === 3 && addDays(record.lastRepeat, 7) <= today) {
       return true;
-    } else if (record.stage === "4" && addDays(record.lastRepeat, 21) < today) {
+    } else if (record.stage === 4 && addDays(record.lastRepeat, 21) <= today) {
       return true;
-    } else if (record.stage === "5" && addDays(record.lastRepeat, 30) < today) {
+    } else if (record.stage === 5 && addDays(record.lastRepeat, 50) <= today) {
       return true;
-    } else if (record.stage === "6" && addDays(record.lastRepeat, 120) < today) {
+    } else if (record.stage === 6 && addDays(record.lastRepeat, 120) <= today) {
       return true;
     } else {
       return false;
@@ -68,17 +68,20 @@ const Category = () => {
 
   return (
     <Fragment>
-      <h1>Records to learn: {learnCount}</h1>
+      <h3>Category {location.pathname.slice(10)}</h3>
+      <div>
+        <AddRecordsForm open={open} setOpen={setOpen} uid={user.uid} />
+      </div>
+      <h3>Records to learn: {learnCount}</h3>
+      <div>
+        {recordsToLearn[0] && (
+          <RecordsLearnForm record={recordsToLearn[0]} getToday={getToday} />
+        )}
+      </div>
       <div>
         <RecordsTable category={location.pathname.slice(10)} uid={user.uid} />
       </div>
       <br></br>
-      <div>
-        {recordsToLearn[0] && <RecordsLearnForm record={recordsToLearn[0]} getToday={getToday}/>}
-      </div>
-      <div>
-        <AddRecordsForm open={open} setOpen={setOpen} uid={user.uid} />
-      </div>
     </Fragment>
   );
 };
