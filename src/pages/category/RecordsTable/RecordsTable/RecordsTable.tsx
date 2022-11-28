@@ -6,18 +6,33 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Paper } from "@mui/material";
-import MoreVert from "../../../../components/MoreVert/MoreVert";
+import MoreVert from "../MoreVert/MoreVert";
 import "./RecordsTable.scss"
+import DeleteRecordsModal from "../../DeleteRecordModal/DeleteRecordsModal";
+import { useState } from "react";
 
 const RecordsTable = ({ category, uid }: any) => {
+  const [deleteId, setDeleteId] = useState<any>(null)
+  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false)
   const { documents } = useCollection(
     "records",
     ["uid", "==", uid],
     ["category", "==", category],
     []
   );
+
+  const handleDeleteModal = (id: any) => {
+    setDeleteId(id)
+    setOpenDeleteModal(true)
+  }
+
+  const handleCloseDeleteModal = () => {
+    setOpenDeleteModal(false)
+  }
+
   return (
     <div className="tableLayout">
+      <DeleteRecordsModal id={deleteId} open={openDeleteModal} handleClose={handleCloseDeleteModal}/>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -47,16 +62,16 @@ const RecordsTable = ({ category, uid }: any) => {
               return (
                 <TableRow
                   hover
-                  key={record.Id}
+                  key={record.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell align="center">{record.answer}</TableCell>
                   <TableCell align="center">{record.question}</TableCell>
+                  <TableCell align="center">{record.answer}</TableCell>
                   <TableCell align="center">{record.category}</TableCell>
                   <TableCell align="center">{record.stage}</TableCell>
                   <TableCell align="center">{record.lastRepeat}</TableCell>
                   <TableCell align="center">
-                    <MoreVert />
+                    <MoreVert id={record.id} delete={handleDeleteModal}/>
                   </TableCell>
                 </TableRow>
               );

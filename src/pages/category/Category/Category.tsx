@@ -3,7 +3,7 @@ import { Fragment, useState, useEffect, useCallback } from "react";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import RecordsTable from "../RecordsTable/RecordsTable/RecordsTable";
 import { useCollection } from "../../../hooks/useCollection";
-import RecordsLearnForm from "../RecordsLearnModal/RecordsLearnModal";
+import RecordsLearnModal from "../RecordsLearnModal/RecordsLearnModal";
 import AddRecordsForm from "../AddRecordsModal/AddRecordsModal";
 
 const Category = () => {
@@ -75,7 +75,7 @@ const Category = () => {
       <h3>Records to learn: {learnCount}</h3>
       <div>
         {recordsToLearn[0] && (
-          <RecordsLearnForm record={recordsToLearn[0]} getToday={getToday} />
+          <RecordsLearnModal record={recordsToLearn[0]} getToday={getToday} />
         )}
       </div>
       <div>

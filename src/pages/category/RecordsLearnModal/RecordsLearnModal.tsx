@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useFirestore } from "../../../hooks/useFirestore";
 import { Button, Modal } from "@mui/material";
 
-const RecordsLearnForm = ({ record, getToday }: any) => {
+const RecordsLearnModal = ({ record, getToday }: any) => {
   const answer = useRef<HTMLInputElement>(null);
   const { updateDocument } = useFirestore("records");
   const [open, setOpen] = useState(false);
@@ -46,4 +46,4 @@ const RecordsLearnForm = ({ record, getToday }: any) => {
   );
 };
 
-export default RecordsLearnForm;
+export default RecordsLearnModal;

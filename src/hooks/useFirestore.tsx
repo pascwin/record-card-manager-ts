@@ -2,7 +2,7 @@ import { useReducer, useEffect, useState } from "react";
 
 //firebase
 import { db, timestamp } from "../firebase/config";
-import { collection, setDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, setDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 
 let initialState = {
   document: null,
@@ -76,6 +76,15 @@ export const useFirestore = (table: any) => {
     }
   };
 
+  const deleteDocument = async(id: any) => {
+    try {
+      const docRef = doc(db, table, id)
+      await deleteDoc(docRef)
+    } catch (err: any) {
+      console.log(err.message)
+    }
+  }
+
   // add document alternative
   // const addDocument = async (doc: any) => {
   //   dispatch({ type: "IS_PENDING" });
@@ -112,5 +121,5 @@ export const useFirestore = (table: any) => {
     };
   }, []);
 
-  return { addDocument, updateDocument, response };
+  return { addDocument, updateDocument, deleteDocument, response };
 };
