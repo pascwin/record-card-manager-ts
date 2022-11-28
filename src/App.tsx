@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 //components
 import Navbar from "./components/Navbar/Navbar";
+import Layout from "./components/Layout/Layout";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
@@ -18,25 +19,27 @@ const App = () => {
       {authIsReady && (
         <Fragment>
           <Navbar />
-          <Routes>
-            <Route
-              path="/"
-              element={user ? <Home /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/home"
-              element={user ? <Home /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/login"
-              element={!user ? <Login /> : <Navigate to="/home" />}
-            />
-            <Route
-              path="/signup"
-              element={!user ? <Signup /> : <Navigate to="/home" />}
-            />
-            <Route path="/category/:category" element={<Category />} />
-          </Routes>
+          <Layout>
+            <Routes>
+              <Route
+                path="/"
+                element={user ? <Home /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/home"
+                element={user ? <Home /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/login"
+                element={!user ? <Login /> : <Navigate to="/home" />}
+              />
+              <Route
+                path="/signup"
+                element={!user ? <Signup /> : <Navigate to="/home" />}
+              />
+              <Route path="/category/:category" element={<Category />} />
+            </Routes>
+          </Layout>
         </Fragment>
       )}
     </div>

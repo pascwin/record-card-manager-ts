@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { Fragment, useState, useEffect, useCallback } from "react";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import RecordsTable from "../RecordsTable/RecordsTable";
+import RecordsTable from "../RecordsTable/RecordsTable/RecordsTable";
 import { useCollection } from "../../../hooks/useCollection";
 import RecordsLearnForm from "../RecordsLearnModal/RecordsLearnModal";
 import AddRecordsForm from "../AddRecordsModal/AddRecordsModal";
