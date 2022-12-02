@@ -8,6 +8,7 @@ import "./AddRecordsModal.scss"
 const AddRecordsForm = ({ open, setOpen, uid }: any) => {
   const question = useRef<HTMLInputElement>(null);
   const answer = useRef<HTMLInputElement>(null);
+  const tip = useRef<HTMLInputElement>(null);
   const { addDocument } = useFirestore("records");
   const location = useLocation()
 
@@ -28,6 +29,7 @@ const AddRecordsForm = ({ open, setOpen, uid }: any) => {
       question: question.current?.value,
       stage: 1,
       lastRepeat: null,
+      tip: tip.current?.value,
     });
   };
 
@@ -46,6 +48,9 @@ const AddRecordsForm = ({ open, setOpen, uid }: any) => {
             <input ref={question} />
             <p>answer:</p>
             <input ref={answer} />
+            <br></br>
+            <p>add a tip</p>
+            <input ref={tip} />
             <br></br>
             <button>add record</button>
           </form>
