@@ -6,6 +6,7 @@ const RecordsLearnModal = ({ record, getToday }: any) => {
   const answer = useRef<HTMLInputElement>(null);
   const { updateDocument } = useFirestore("records");
   const [open, setOpen] = useState(false);
+  const [showTip, setShowTip] = useState(false)
 
   const checkAnswerHandler = async (event: any) => {
     event.preventDefault();
@@ -25,6 +26,12 @@ const RecordsLearnModal = ({ record, getToday }: any) => {
     setOpen(false);
   };
 
+  const showTipHandler = () => {
+    setShowTip((prevState:boolean) => {
+      return !prevState;
+    })
+  }
+
   return (
     <>
       <Button onClick={handleOpen}>Learn category</Button>
@@ -40,6 +47,11 @@ const RecordsLearnModal = ({ record, getToday }: any) => {
             <input ref={answer} />
             <button>Check Answer</button>
           </form>
+          <br></br>
+          {record.tip || true && <div>
+            <Button onClick={showTipHandler}>Show Tip</Button>
+            {showTip && <p>This is a Tip</p>}
+          </div>}
         </div>
       </Modal>
     </>
