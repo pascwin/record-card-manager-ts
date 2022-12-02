@@ -48,13 +48,12 @@ const RecordsLearnModal = ({ record, getToday }: any) => {
             <button>Check Answer</button>
           </form>
           <br></br>
-          {record.tip ||
-            (true && (
-              <div>
-                <Button onClick={showTipHandler}>Show Tip</Button>
-                {showTip && <p>This is a Tip</p>}
-              </div>
-            ))}
+          {record.tip && (
+            <div>
+              <Button onClick={showTipHandler}>Show Tip</Button>
+              {showTip && <p>{record.tip}</p>}
+            </div>
+          )}
         </div>
       </Modal>
     </>
