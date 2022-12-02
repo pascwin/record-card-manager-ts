@@ -1,8 +1,15 @@
-import { useReducer, useEffect, useState } from "react";
+import { useReducer, useEffect, useState, useCallback } from "react";
 
 //firebase
 import { db, timestamp } from "../firebase/config";
-import { collection, setDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  setDoc,
+  doc,
+  updateDoc,
+  deleteDoc,
+  getDoc,
+} from "firebase/firestore";
 
 let initialState = {
   document: null,
@@ -76,44 +83,27 @@ export const useFirestore = (table: any) => {
     }
   };
 
-  const deleteDocument = async(id: any) => {
+  const deleteDocument = async (id: any) => {
     try {
-      const docRef = doc(db, table, id)
-      await deleteDoc(docRef)
+      const docRef = doc(db, table, id);
+      await deleteDoc(docRef);
     } catch (err: any) {
-      console.log(err.message)
+      console.log(err.message);
     }
-  }
+  };
 
-  // add document alternative
-  // const addDocument = async (doc: any) => {
-  //   dispatch({ type: "IS_PENDING" });
-  //   try {
-  //     const createdAt = timestamp.fromDate(new Date());
-  //     const addedDocument = await addDoc(collection(db, table), {
-  //       ...doc,
-  //       createdAt,
-  //     });
-  //     console.log(addedDocument);
-  //     dispatchIfNotCancelled({
-  //       type: "ADDED_DOCUMENT",
-  //       payload: addedDocument,
-  //     });
-  //   } catch (err: any) {
-  //     dispatchIfNotCancelled({ type: "ERROR", payload: err.message });
-  //   }
-  // };
-
-  //delete document
-  // const deleteDocument = async (id: any) => {
-  //     dispatch({ type: "IS_PENDING" })
-  //     try {
-  //         await ref.doc(id).delete()
-  //         dispatchIfNotCancelled({ type: "DELETED_DOCUMENT" })
-  //     } catch (err) {
-  //         dispatchIfNotCancelled({type: "ERROR", payload: "could not delete"})
-  //     }
-  // }
+  const getOneDocument = useCallback(async (id: any) => {
+    if (!id) {
+      return;
+    }
+    try {
+      const docRef = doc(db, table, id);
+      const docSnap = await getDoc(docRef);
+      return docSnap.data();
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  }, [table]);
 
   useEffect(() => {
     return () => {
@@ -121,5 +111,11 @@ export const useFirestore = (table: any) => {
     };
   }, []);
 
-  return { addDocument, updateDocument, deleteDocument, response };
+  return {
+    addDocument,
+    updateDocument,
+    deleteDocument,
+    getOneDocument,
+    response,
+  };
 };

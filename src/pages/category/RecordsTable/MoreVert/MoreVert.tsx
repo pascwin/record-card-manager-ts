@@ -9,12 +9,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
-type MoreVertProps = {
-  id: any;
-  edit?: () => void;
-  delete?: (id: any) => void;
-};
-
 const MoreVert = (props: any) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [placement, setPlacement] = useState<PopperPlacementType>();
@@ -27,6 +21,10 @@ const MoreVert = (props: any) => {
   const handleDelete = () => {
     props.delete(props.id);
   };
+
+  const handleEdit = () => {
+    props.edit(props.id)
+  }
 
   const handleClick =
     (newPlacement: PopperPlacementType) =>
@@ -51,7 +49,7 @@ const MoreVert = (props: any) => {
                 <Typography sx={{ p: 1 }}>
                   <EditIcon
                     style={{ cursor: "pointer", marginRight: "8px" }}
-                    onClick={props.edit}
+                    onClick={handleEdit}
                   />
                   <DeleteForeverIcon
                     style={{ cursor: "pointer" }}

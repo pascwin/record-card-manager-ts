@@ -1,6 +1,5 @@
-import { useRef, useState } from "react";
 import { useFirestore } from "../../../hooks/useFirestore";
-import { Button, Modal } from "@mui/material";
+import { Modal } from "@mui/material";
 
 const DeleteRecordsModal = ({ id, open, handleClose }: any) => {
   const { deleteDocument } = useFirestore("records");

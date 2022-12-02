@@ -7,13 +7,20 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Paper } from "@mui/material";
 import MoreVert from "../MoreVert/MoreVert";
-import "./RecordsTable.scss"
+import "./RecordsTable.scss";
 import DeleteRecordsModal from "../../DeleteRecordModal/DeleteRecordsModal";
-import { useState } from "react";
+import EditRecordsModal from "../../EditRecordsModal/EditRecordsModal";
+import { useEffect, useState } from "react";
+import { useFirestore } from "../../../../hooks/useFirestore";
 
 const RecordsTable = ({ category, uid }: any) => {
-  const [deleteId, setDeleteId] = useState<any>(null)
-  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false)
+  const [deleteId, setDeleteId] = useState<any>(null);
+  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
+  const [editId, setEditId] = useState<any>(null);
+  const [openEditModal, setOpenEditModal] = useState<boolean>(false);
+  const [recordToEdit, setRecordtoEdit] = useState<any>();
+  const { getOneDocument } = useFirestore("records");
+
   const { documents } = useCollection(
     "records",
     ["uid", "==", uid],
@@ -22,17 +29,48 @@ const RecordsTable = ({ category, uid }: any) => {
   );
 
   const handleDeleteModal = (id: any) => {
-    setDeleteId(id)
-    setOpenDeleteModal(true)
-  }
+    setDeleteId(id);
+    setOpenDeleteModal(true);
+  };
 
   const handleCloseDeleteModal = () => {
-    setOpenDeleteModal(false)
-  }
+    setOpenDeleteModal(false);
+  };
+
+  const handleEditModal = (id: any) => {
+    setEditId(id);
+    setOpenEditModal(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setOpenEditModal(false);
+    setRecordtoEdit(null);
+    setEditId(null);
+  };
+
+  useEffect(() => {
+    const getRecordToEdit2 = async (id: any) => {
+      const record = await getOneDocument(id);
+      setRecordtoEdit(record);
+    };
+    getRecordToEdit2(editId);
+  }, [editId, getOneDocument]);
 
   return (
     <div className="tableLayout">
-      <DeleteRecordsModal id={deleteId} open={openDeleteModal} handleClose={handleCloseDeleteModal}/>
+      <DeleteRecordsModal
+        id={deleteId}
+        open={openDeleteModal}
+        handleClose={handleCloseDeleteModal}
+      />
+      {recordToEdit && (
+        <EditRecordsModal
+          record={recordToEdit}
+          seRecord={setRecordtoEdit}
+          open={openEditModal}
+          handleClose={handleCloseEditModal}
+        />
+      )}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -71,7 +109,11 @@ const RecordsTable = ({ category, uid }: any) => {
                   <TableCell align="center">{record.stage}</TableCell>
                   <TableCell align="center">{record.lastRepeat}</TableCell>
                   <TableCell align="center">
-                    <MoreVert id={record.id} delete={handleDeleteModal}/>
+                    <MoreVert
+                      id={record.id}
+                      delete={handleDeleteModal}
+                      edit={handleEditModal}
+                    />
                   </TableCell>
                 </TableRow>
               );
