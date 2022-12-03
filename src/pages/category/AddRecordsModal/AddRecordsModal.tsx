@@ -3,14 +3,14 @@ import { useLocation } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { useFirestore } from "../../../hooks/useFirestore";
-import "./AddRecordsModal.scss"
+import "./AddRecordsModal.scss";
 
 const AddRecordsForm = ({ open, setOpen, uid }: any) => {
   const question = useRef<HTMLInputElement>(null);
   const answer = useRef<HTMLInputElement>(null);
   const tip = useRef<HTMLInputElement>(null);
   const { addDocument } = useFirestore("records");
-  const location = useLocation()
+  const location = useLocation();
 
   const handleOpen = () => {
     setOpen(true);
@@ -31,6 +31,7 @@ const AddRecordsForm = ({ open, setOpen, uid }: any) => {
       lastRepeat: null,
       tip: tip.current?.value,
     });
+    event.target.reset()
   };
 
   return (
