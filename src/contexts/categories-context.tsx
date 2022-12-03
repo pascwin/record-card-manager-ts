@@ -11,14 +11,13 @@ export const CategoriesProvider = ({ children }: any) => {
   const [categories, setCategories] = useState<any>();
   const { currentUser } = useContext(UserContext);
 
-  const value = { categories, setCategories };
+  const value = { categories };
 
   useEffect(() => {
     const getAllCategories = async () => {
         const categories = await getCategories(currentUser.uid);
         setCategories(categories);
     };
-    console.log(currentUser)
     if (currentUser) {
         getAllCategories()
     }

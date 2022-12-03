@@ -30,6 +30,10 @@ const App = () => {
                 element={user ? <Home /> : <Navigate to="/login" />}
               />
               <Route
+                path="/category/:category"
+                element={user ? <Category /> : <Navigate to="/login" />}
+              />
+              <Route
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/home" />}
               />
@@ -37,7 +41,6 @@ const App = () => {
                 path="/signup"
                 element={!user ? <Signup /> : <Navigate to="/home" />}
               />
-              <Route path="/category/:category" element={<Category />} />
             </Routes>
           </Layout>
         </Fragment>
