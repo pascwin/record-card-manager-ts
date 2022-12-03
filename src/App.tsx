@@ -20,28 +20,30 @@ const App = () => {
         <Fragment>
           <Navbar />
           <Layout>
-            <Routes>
-              <Route
-                path="/"
-                element={user ? <Home /> : <Navigate to="/login" />}
-              />
-              <Route
-                path="/home"
-                element={user ? <Home /> : <Navigate to="/login" />}
-              />
-              <Route
-                path="/category/:category"
-                element={user ? <Category /> : <Navigate to="/login" />}
-              />
-              <Route
-                path="/login"
-                element={!user ? <Login /> : <Navigate to="/home" />}
-              />
-              <Route
-                path="/signup"
-                element={!user ? <Signup /> : <Navigate to="/home" />}
-              />
-            </Routes>
+            <div style={{marginTop: "20px"}}>
+              <Routes>
+                <Route
+                  path="/"
+                  element={user ? <Home /> : <Navigate to="/login" />}
+                />
+                <Route
+                  path="/home"
+                  element={user ? <Home /> : <Navigate to="/login" />}
+                />
+                <Route
+                  path="/category/:category"
+                  element={user ? <Category /> : <Navigate to="/login" />}
+                />
+                <Route
+                  path="/login"
+                  element={!user ? <Login /> : <Navigate to="/home" />}
+                />
+                <Route
+                  path="/signup"
+                  element={!user ? <Signup /> : <Navigate to="/home" />}
+                />
+              </Routes>
+            </div>
           </Layout>
         </Fragment>
       )}

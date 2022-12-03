@@ -4,6 +4,9 @@
     background: #effaf0;
     padding: 20px 10px;
     box-sizing: border-box;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    z-index: 1;
   }
   .navbar ul {
     display: flex;
