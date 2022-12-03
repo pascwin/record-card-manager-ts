@@ -15,6 +15,7 @@ const RecordsLearnModal = ({ record, getToday }: any) => {
         stage: record.stage + 1,
         lastRepeat: getToday(),
       });
+      event.target.reset()
     }
   };
 
