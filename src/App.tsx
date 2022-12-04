@@ -20,7 +20,7 @@ const App = () => {
         <Fragment>
           <Navbar />
           <Layout>
-            <div style={{marginTop: "20px"}}>
+           
               <Routes>
                 <Route
                   path="/"
@@ -43,7 +43,7 @@ const App = () => {
                   element={!user ? <Signup /> : <Navigate to="/home" />}
                 />
               </Routes>
-            </div>
+            
           </Layout>
         </Fragment>
       )}

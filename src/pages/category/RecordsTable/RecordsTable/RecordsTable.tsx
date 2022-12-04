@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Paper } from "@mui/material";
+import { Pagination, Paper, TablePagination } from "@mui/material";
 import MoreVert from "../MoreVert/MoreVert";
 import "./RecordsTable.scss";
 import DeleteRecordsModal from "../../DeleteRecordModal/DeleteRecordsModal";
@@ -20,6 +20,19 @@ const RecordsTable = ({ category, uid }: any) => {
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
   const [recordToEdit, setRecordtoEdit] = useState<any>();
   const { getOneDocument } = useFirestore("records");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   const { documents } = useCollection(
     "records",
@@ -72,9 +85,9 @@ const RecordsTable = ({ category, uid }: any) => {
         />
       )}
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label="simple table" padding="none">
           <TableHead>
-            <TableRow>
+            <TableRow style={{ padding: "10px" }}>
               <TableCell style={{ fontWeight: "bold" }} align="center">
                 Question
               </TableCell>
@@ -96,28 +109,31 @@ const RecordsTable = ({ category, uid }: any) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {documents?.map((record: any) => {
-              return (
-                <TableRow
-                  hover
-                  key={record.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell align="center">{record.question}</TableCell>
-                  <TableCell align="center">{record.answer}</TableCell>
-                  <TableCell align="center">{record.category}</TableCell>
-                  <TableCell align="center">{record.stage}</TableCell>
-                  <TableCell align="center">{record.lastRepeat}</TableCell>
-                  <TableCell align="center">
-                    <MoreVert
-                      id={record.id}
-                      delete={handleDeleteModal}
-                      edit={handleEditModal}
-                    />
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+            {documents &&
+              documents
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((record: any) => {
+                  return (
+                    <TableRow
+                      hover
+                      key={record.id}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell align="center">{record.question}</TableCell>
+                      <TableCell align="center">{record.answer}</TableCell>
+                      <TableCell align="center">{record.category}</TableCell>
+                      <TableCell align="center">{record.stage}</TableCell>
+                      <TableCell align="center">{record.lastRepeat}</TableCell>
+                      <TableCell align="center">
+                        <MoreVert
+                          id={record.id}
+                          delete={handleDeleteModal}
+                          edit={handleEditModal}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
             <TableRow
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
@@ -126,6 +142,17 @@ const RecordsTable = ({ category, uid }: any) => {
           </TableBody>
         </Table>
       </TableContainer>
+      <div>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={documents.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </div>
     </div>
   );
 };
