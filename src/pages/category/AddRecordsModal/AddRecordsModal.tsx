@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
-import Button from "@mui/material/Button";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Modal from "@mui/material/Modal";
 import { useFirestore } from "../../../hooks/useFirestore";
 import "./AddRecordsModal.scss";
@@ -31,12 +31,20 @@ const AddRecordsForm = ({ open, setOpen, uid }: any) => {
       lastRepeat: null,
       tip: tip.current?.value,
     });
-    event.target.reset()
+    event.target.reset();
   };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add Records</Button>
+      <div className="icon-container">
+        <AddCircleIcon
+          onClick={handleOpen}
+          fontSize="large"
+          style={{ cursor: "pointer" }}
+          color="primary"
+        />
+        <p>add records</p>
+      </div>
       <Modal
         open={open}
         onClose={handleClose}

@@ -1,11 +1,22 @@
-.recordFormContainer {
+.button-container {
     display: flex;
-    margin: 100px;
-    width: 60%;
-    height: 50%;
-    background-color: whitesmoke;
     justify-content: center;
-    form {
-      margin: 10px;
-    }
+    align-items: center;
+    padding: 20px;
+    margin-right: 20px;
+  p {
+    margin-right: 10px;
   }
+}
+
+.recordFormContainer {
+  display: flex;
+  margin: 100px;
+  width: 60%;
+  height: 50%;
+  background-color: whitesmoke;
+  justify-content: center;
+  form {
+    margin: 10px;
+  }
+}

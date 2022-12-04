@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Pagination, Paper, TablePagination } from "@mui/material";
+import { Paper, TablePagination } from "@mui/material";
 import MoreVert from "../MoreVert/MoreVert";
 import "./RecordsTable.scss";
 import DeleteRecordsModal from "../../DeleteRecordModal/DeleteRecordsModal";

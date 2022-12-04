@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
 import { useFirestore } from "../../../hooks/useFirestore";
 import { Button, Modal } from "@mui/material";
+import "./RecordsLearnModal.scss"
 
-const RecordsLearnModal = ({ record, getToday }: any) => {
+const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
   const answer = useRef<HTMLInputElement>(null);
   const { updateDocument } = useFirestore("records");
   const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ const RecordsLearnModal = ({ record, getToday }: any) => {
         stage: record.stage + 1,
         lastRepeat: getToday(),
       });
-      event.target.reset()
+      event.target.reset();
     }
   };
 
@@ -35,7 +36,13 @@ const RecordsLearnModal = ({ record, getToday }: any) => {
 
   return (
     <>
-      <Button onClick={handleOpen}>Learn category</Button>
+      <div className="button-container">
+        <p>due today: {learnCount}</p>
+        <Button onClick={handleOpen} variant="contained">
+          Learn category
+        </Button>
+      </div>
+
       <Modal
         open={open}
         onClose={handleClose}

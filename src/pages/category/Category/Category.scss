@@ -1,0 +1,21 @@
+.information-container {
+  display: flex;
+  flex-direction: row;
+
+  .learn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-left: auto;
+
+    .no-records-container {
+      display: flex;
+      align-items: center;
+      padding: 26px;
+      margin-right: 20px;
+      p {
+        margin-right: 10px;
+      }
+    }
+  }
+}

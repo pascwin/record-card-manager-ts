@@ -5,17 +5,21 @@ import RecordsTable from "../RecordsTable/RecordsTable/RecordsTable";
 import { useCollection } from "../../../hooks/useCollection";
 import RecordsLearnModal from "../RecordsLearnModal/RecordsLearnModal";
 import AddRecordsForm from "../AddRecordsModal/AddRecordsModal";
+import Title from "../../../components/Title/Title";
+import { Divider } from "@mui/material";
+import "./Category.scss";
 
 const Category = () => {
   const [learnCount, setLearnCount] = useState(0);
   const [open, setOpen] = useState(false);
   const [recordsToLearn, setRecordsToLearn] = useState([]);
   const location = useLocation();
+  const category = location.pathname.slice(10);
   const { user } = useAuthContext();
   const { documents } = useCollection(
     "records",
     ["uid", "==", user.uid],
-    ["category", "==", location.pathname.slice(10)],
+    ["category", "==", category],
     []
   );
 
@@ -68,16 +72,29 @@ const Category = () => {
 
   return (
     <Fragment>
-      <h3>Category {location.pathname.slice(10)}</h3>
-      <div>
-        <AddRecordsForm open={open} setOpen={setOpen} uid={user.uid} />
+      <Divider style={{ marginTop: "70px" }} />
+      <div className="information-container">
+        <Title title={`${category} Records`} />
+        <div className="learn-container">
+          <div>
+            {recordsToLearn[0] ? (
+              <RecordsLearnModal
+                record={recordsToLearn[0]}
+                getToday={getToday}
+                learnCount={learnCount}
+              />
+            ) : (
+              <div className="no-records-container">
+                <p>0 records to learn</p>
+              </div>
+            )}
+          </div>
+          <div>
+            <AddRecordsForm open={open} setOpen={setOpen} uid={user.uid} />
+          </div>
+        </div>
       </div>
-      <h3>Records to learn: {learnCount}</h3>
-      <div>
-        {recordsToLearn[0] && (
-          <RecordsLearnModal record={recordsToLearn[0]} getToday={getToday} />
-        )}
-      </div>
+      <Divider style={{ marginBottom: "20px" }} />
       <div>
         <RecordsTable category={location.pathname.slice(10)} uid={user.uid} />
       </div>
