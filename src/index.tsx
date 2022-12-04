@@ -14,7 +14,7 @@ root.render(
     <AuthContextProvider>
       <CategoriesProvider>
         <RecordCardProvider>
-          <App />
+            <App />
         </RecordCardProvider>
       </CategoriesProvider>
     </AuthContextProvider>

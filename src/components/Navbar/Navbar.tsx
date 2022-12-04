@@ -10,7 +10,7 @@ const Navbar = () => {
     const { user } = useAuthContext();
 
     return (
-        <nav className={styles.navbar}>
+        <nav className={`${styles.navbar} bg-dark-purple`}>
             <ul>
                 <li className={styles.title}>myMemory</li>
                 {!user && (

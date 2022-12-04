@@ -72,7 +72,7 @@ const Category = () => {
 
   return (
     <Fragment>
-      <Divider style={{ marginTop: "70px" }} />
+      <Divider />
       <div className="information-container">
         <Title title={`${category} Records`} />
         <div className="learn-container">
