@@ -1,11 +1,10 @@
-import { ReactNode, useState } from "react";
 import logo from "../../assets/logo.png"
 import control from "../../assets/control.png"
 import Chart_fill from "../../assets/Chart_fill.png"
 // import logo from "../../assets/logo.png"
 // import logo from "../../assets/logo.png"
-const Sidebar: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [open, setOpen] = useState(true);
+const Sidebar = (props:any) => {
+//   const [open, setOpen] = useState(true);
   const Menus = [
     { title: "Dashboard", src: Chart_fill },
     { title: "Inbox", src: "Chat" },
@@ -21,27 +20,28 @@ const Sidebar: React.FC<{ children: ReactNode }> = ({ children }) => {
     <div className="flex" style={{marginTop: "46px"}}>
       <div
         className={` ${
-          open ? "w-72" : "w-20 "
+          props.open ? "w-72" : "w-20 "
         } bg-dark-purple h-screen p-5  pt-8 relative duration-300`}
+        style={{position: "fixed"}}
       >
         <img
           src={control}
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
-           border-2 rounded-full  ${!open && "rotate-180"}`}
-          onClick={() => setOpen(!open)}
+           border-2 rounded-full  ${!props.open && "rotate-180"}`}
+          onClick={() => props.setOpen(!props.open)}
           alt="1"
         />
         <div className="flex gap-x-4 items-center">
           <img
             src={logo}
             className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
+              props.open && "rotate-[360deg]"
             }`}
             alt="1"
           />
           <h1
             className={`text-white origin-left font-medium text-xl duration-200 ${
-              !open && "scale-0"
+              !props.open && "scale-0"
             }`}
           >
             Designer
@@ -57,7 +57,7 @@ const Sidebar: React.FC<{ children: ReactNode }> = ({ children }) => {
               } `}
             >
               <img src={Menu.src} alt="1" />
-              <span className={`${!open && "hidden"} origin-left duration-200`}>
+              <span className={`${!props.open && "hidden"} origin-left duration-200`}>
                 {Menu.title}
               </span>
             </li>
@@ -65,7 +65,7 @@ const Sidebar: React.FC<{ children: ReactNode }> = ({ children }) => {
         </ul>
       </div>
       <div className="h-screen flex-1 p-7">
-        <h1 className="text-2xl font-semibold ">{children}</h1>
+        <h1 className="text-2xl font-semibold ">{props.children}</h1>
       </div>
     </div>
   );
