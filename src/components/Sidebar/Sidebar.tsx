@@ -1,19 +1,25 @@
 import logo from "../../assets/logo.png"
 import control from "../../assets/control.png"
-import Chart_fill from "../../assets/Chart_fill.png"
-// import logo from "../../assets/logo.png"
-// import logo from "../../assets/logo.png"
+import CategoryIcon from '@mui/icons-material/Category';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 const Sidebar = (props:any) => {
-//   const [open, setOpen] = useState(true);
+  const navigate = useNavigate()
+  const location = useLocation()
+  console.log(location)
   const Menus = [
-    { title: "Dashboard", src: Chart_fill },
-    { title: "Inbox", src: "Chat" },
-    { title: "Accounts", src: "User", gap: true },
-    { title: "Schedule ", src: "Calendar" },
-    { title: "Search", src: "Search" },
-    { title: "Analytics", src: "Chart" },
-    { title: "Files ", src: "Folder", gap: true },
-    { title: "Setting", src: "Setting" },
+    { title: "Dashboard", src: <DashboardIcon />, gap: false, path: ["/home", "/"] },
+    { title: "Statistics", src: <BarChartIcon />, gap: false, path: ["/statistics"] },
+    { title: "Categories", src: <CategoryIcon />, gap: true, path: ["/category"] },
+    // { title: "Inbox", src: Chat },
+    // { title: "Accounts", src: "User", gap: true },
+    // { title: "Schedule ", src: Category },
+    // { title: "Search", src: "Search" },
+    // { title: "Analytics", src: "Chart" },
+    // { title: "Files ", src: Folder, gap: true },
+    // { title: "Setting", src: "Setting" },
   ];
 
   return (
@@ -34,7 +40,7 @@ const Sidebar = (props:any) => {
         <div className="flex gap-x-4 items-center">
           <img
             src={logo}
-            className={`cursor-pointer duration-500 ${
+            className={`cursor-pointer duration-500 white ${
               props.open && "rotate-[360deg]"
             }`}
             alt="1"
@@ -51,12 +57,14 @@ const Sidebar = (props:any) => {
           {Menus.map((Menu, index) => (
             <li
               key={index}
+              onClick={() => navigate(Menu.path[0])}
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
-              ${Menu.gap ? "mt-9" : "mt-2"} ${
-                index === 0 && "bg-light-white"
-              } `}
+              ${Menu.gap ? "mt-9" : "mt-2"} 
+              ${Menu.path.includes(location.pathname) && "bg-light-white"}`}
             >
-              <img src={Menu.src} alt="1" />
+                <div>
+                    {Menu.src}
+                </div>
               <span className={`${!props.open && "hidden"} origin-left duration-200`}>
                 {Menu.title}
               </span>

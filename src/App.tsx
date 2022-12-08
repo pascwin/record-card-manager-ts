@@ -5,10 +5,11 @@ import { Routes, Route, Navigate } from "react-router-dom";
 //components
 import Navbar from "./components/Navbar/Navbar";
 import Layout from "./components/Layout/Layout";
-import Home from "./pages/home/Home";
+import CategoryOverview from "./pages/category-overview/CategoryOverview";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import Category from "./pages/category/Category/Category";
+import Home from "./pages/home/Home";
 
 // import { UserContext } from "./contexts/user-context";
 
@@ -28,6 +29,10 @@ const App = () => {
               <Route
                 path="/home"
                 element={user ? <Home /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/category"
+                element={user ? <CategoryOverview /> : <Navigate to="/login" />}
               />
               <Route
                 path="/category/:category"
