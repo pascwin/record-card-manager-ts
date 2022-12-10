@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 
 const CategoriesList = ({ uid }: any) => {
   const { documents } = useCollection("categories", ["uid", "==", uid], [], []);
-
   return (
     <div>
       <h1>Categories List</h1>
