@@ -8,7 +8,6 @@ import { useLocation } from "react-router-dom";
 const Sidebar = (props:any) => {
   const navigate = useNavigate()
   const location = useLocation()
-  console.log(location)
   const Menus = [
     { title: "Dashboard", src: <DashboardIcon />, gap: false, path: ["/home", "/"] },
     { title: "Statistics", src: <BarChartIcon />, gap: false, path: ["/statistics"] },
@@ -21,6 +20,8 @@ const Sidebar = (props:any) => {
     // { title: "Files ", src: Folder, gap: true },
     // { title: "Setting", src: "Setting" },
   ];
+
+  console.log(Menus[2].path.includes(location.pathname.slice(0,9)))
 
   return (
     <div className="flex" style={{marginTop: "46px"}}>
@@ -60,7 +61,9 @@ const Sidebar = (props:any) => {
               onClick={() => navigate(Menu.path[0])}
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
               ${Menu.gap ? "mt-9" : "mt-2"} 
-              ${Menu.path.includes(location.pathname) && "bg-light-white"}`}
+              ${(Menu.path.includes(location.pathname) || Menu.path.includes(location.pathname.slice(0,9))) && "bg-light-white"}`}
+              //for categorys muss two values be true:
+              // location.pathname.slice(0,9) && location.pathname.slice(10) === "categoryname"
             >
                 <div>
                     {Menu.src}
