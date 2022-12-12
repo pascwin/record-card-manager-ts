@@ -12,6 +12,7 @@ import DeleteRecordsModal from "../../DeleteRecordModal/DeleteRecordsModal";
 import EditRecordsModal from "../../EditRecordsModal/EditRecordsModal";
 import { useEffect, useState } from "react";
 import { useFirestore } from "../../../../hooks/useFirestore";
+import Scroll from "../../../../components/Scroll/Scroll";
 
 const RecordsTable = ({ category, uid }: any) => {
   const [deleteId, setDeleteId] = useState<any>(null);
@@ -85,8 +86,9 @@ const RecordsTable = ({ category, uid }: any) => {
         />
       )}
       <TableContainer component={Paper}>
+      <Scroll>
         <Table sx={{ minWidth: 650 }} aria-label="simple table" padding="none">
-          <TableHead>
+          <TableHead style={{position: "sticky"}}>
             <TableRow style={{ padding: "10px" }}>
               <TableCell style={{ fontWeight: "bold" }} align="center">
                 Question
@@ -141,6 +143,7 @@ const RecordsTable = ({ category, uid }: any) => {
             </TableRow>
           </TableBody>
         </Table>
+        </Scroll>
       </TableContainer>
       <div>
         <TablePagination

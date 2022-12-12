@@ -28,8 +28,6 @@ const AddRecordsForm = ({ open, setOpen, uid }: any) => {
     });
   };
 
-  console.log(reverseChecked)
-
   const addRecordHandler = (event: any) => {
     event.preventDefault();
     addDocument({
@@ -64,7 +62,7 @@ const AddRecordsForm = ({ open, setOpen, uid }: any) => {
           style={{ cursor: "pointer" }}
           color="primary"
         />
-        <p>add records</p>
+        <p className="text-lg">add records</p>
       </div>
       <Modal
         open={open}

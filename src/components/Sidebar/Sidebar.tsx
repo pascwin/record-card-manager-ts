@@ -72,7 +72,7 @@ const Sidebar = (props:any) => {
           ))}
         </ul>
       </div>
-      <div className="h-screen flex-1 p-7">
+      <div className="h-screen flex-1 p-4">
         <h1 className="text-2xl font-semibold ">{props.children}</h1>
       </div>
     </div>

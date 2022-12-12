@@ -85,7 +85,7 @@ const Category = () => {
               />
             ) : (
               <div className="no-records-container">
-                <p>0 records to learn</p>
+                <p className="text-lg">0 records to learn</p>
               </div>
             )}
           </div>
@@ -94,10 +94,8 @@ const Category = () => {
           </div>
         </div>
       </div>
-      <Divider style={{ marginBottom: "20px" }} />
-      <div>
+      <Divider style={{ marginBottom: "15px" }} />
         <RecordsTable category={location.pathname.slice(10)} uid={user.uid} />
-      </div>
       <br></br>
     </Fragment>
   );

@@ -37,7 +37,7 @@ const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
   return (
     <>
       <div className="button-container">
-        <p>due today: {learnCount}</p>
+        <p className="text-lg">due today: {learnCount}</p>
         <Button onClick={handleOpen} variant="contained">
           Learn category
         </Button>
