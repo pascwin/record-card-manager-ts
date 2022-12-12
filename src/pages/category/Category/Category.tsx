@@ -76,26 +76,24 @@ const Category = () => {
       <div className="information-container">
         <Title title={`${category} Records`} />
         <div className="learn-container">
-          <div>
-            {recordsToLearn[0] ? (
-              <RecordsLearnModal
-                record={recordsToLearn[0]}
-                getToday={getToday}
-                learnCount={learnCount}
-              />
-            ) : (
-              <div className="no-records-container">
-                <p className="text-lg">0 records to learn</p>
-              </div>
-            )}
-          </div>
+          {recordsToLearn[0] ? (
+            <RecordsLearnModal
+              record={recordsToLearn[0]}
+              getToday={getToday}
+              learnCount={learnCount}
+            />
+          ) : (
+            <div className="no-records-container">
+              <p className="text-lg">0 records to learn</p>
+            </div>
+          )}
           <div>
             <AddRecordsForm open={open} setOpen={setOpen} uid={user.uid} />
           </div>
         </div>
       </div>
       <Divider style={{ marginBottom: "15px" }} />
-        <RecordsTable category={location.pathname.slice(10)} uid={user.uid} />
+      <RecordsTable category={location.pathname.slice(10)} uid={user.uid} />
       <br></br>
     </Fragment>
   );

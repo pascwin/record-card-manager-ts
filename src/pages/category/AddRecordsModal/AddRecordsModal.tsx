@@ -88,7 +88,7 @@ const AddRecordsForm = ({ open, setOpen, uid }: any) => {
                   name="jason"
                 />
               }
-              label="create reverse Record"
+              label="create reverse record"
             />
             <br></br>
             <button>add record</button>
