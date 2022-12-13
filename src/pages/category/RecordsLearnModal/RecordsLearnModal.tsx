@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useFirestore } from "../../../hooks/useFirestore";
-import { Button, Modal } from "@mui/material";
-import "./RecordsLearnModal.scss"
+import { Button, Modal, TextField } from "@mui/material";
+import "./RecordsLearnModal.scss";
 
 const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
   const answer = useRef<HTMLInputElement>(null);
@@ -48,20 +48,43 @@ const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         <div className="recordLearnFormContainer">
           <form onSubmit={checkAnswerHandler}>
-            <p>question: {record?.question}</p>
-            <input ref={answer} />
-            <button>Check Answer</button>
+            <p style={{ padding: "0px 10px" }}>Question:</p>
+            <div className="question-answer-container">
+              <div className="question-container">
+                <p>{record?.question}</p>
+              </div>
+              <div className="answer-container">
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Answer"
+                  multiline
+                  rows={4}
+                  inputRef={answer}
+                  fullWidth={true}
+                  required={true}
+                  style={{ backgroundColor: "white" }}
+                />
+              </div>
+            </div>
+            {record.tip && (
+              <div>
+                <Button onClick={showTipHandler}>{showTip ? "Hide Tip" : "Show Tip"}</Button>
+                {showTip && <p style={{ padding: "0px 10px" }}>{record.tip}</p>}
+              </div>
+            )}
+            <div className="button-container">
+            <Button variant="contained" type="submit">Check Answer</Button>
+            </div>
           </form>
           <br></br>
-          {record.tip && (
-            <div>
-              <Button onClick={showTipHandler}>Show Tip</Button>
-              {showTip && <p>{record.tip}</p>}
-            </div>
-          )}
         </div>
       </Modal>
     </>
