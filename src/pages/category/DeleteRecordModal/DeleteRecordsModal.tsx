@@ -23,7 +23,7 @@ const DeleteRecordsModal = ({ id, open, handleClose }: any) => {
           alignItems: "center",
         }}
       >
-        <div className="recordFormContainer">
+        <div className="recordDeleteFormContainer">
         <p>Do you want to delete this record?</p>
           <div className="button-container">
             <Button
