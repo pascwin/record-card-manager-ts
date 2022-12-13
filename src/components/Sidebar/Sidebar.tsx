@@ -27,7 +27,7 @@ const Sidebar = (props:any) => {
     <div className="flex" style={{marginTop: "46px"}}>
       <div
         className={` ${
-          props.open ? "w-72" : "w-20 "
+          props.open ? "w-60" : "w-20 "
         } bg-dark-purple h-screen p-5  pt-8 relative duration-300`}
         style={{position: "fixed"}}
       >

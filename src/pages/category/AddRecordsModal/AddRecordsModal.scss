@@ -13,12 +13,40 @@
 
 .recordFormContainer {
   display: flex;
-  margin: 100px;
-  width: 60%;
-  height: 50%;
+  width: 80%;
+  height: 80%;
   background-color: whitesmoke;
   justify-content: center;
+  border-radius: 10px;
+
   form {
-    margin: 10px;
+    width: 60%;
+    margin: 50px 0px;
+
+    .question-answer-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .input-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+      }
+    }
+
+    .tip-container {
+      padding: 10px;
+    }
+    
+    .button-container {
+      width: 100%;
+      display: flex;
+      padding: 10px;
+      justify-content: space-between;
+      margin-top: 50px;
+    }
   }
 }

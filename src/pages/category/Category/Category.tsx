@@ -87,7 +87,7 @@ const Category = () => {
               <p className="text-lg">0 records to learn</p>
             </div>
           )}
-          <div>
+          <div className="modal-container">
             <AddRecordsForm open={open} setOpen={setOpen} uid={user.uid} />
           </div>
         </div>

@@ -49,7 +49,7 @@ const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div className="recordFormContainer">
+        <div className="recordLearnFormContainer">
           <form onSubmit={checkAnswerHandler}>
             <p>question: {record?.question}</p>
             <input ref={answer} />

@@ -56,6 +56,7 @@ export const useFirestore = (table: any) => {
 
   const addDocument = async (document: any) => {
     dispatch({ type: "IS_PENDING" });
+    console.log(document)
     try {
       const docRef = collection(db, table);
       const createdAt = timestamp.fromDate(new Date());
