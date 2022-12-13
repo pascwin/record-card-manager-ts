@@ -76,12 +76,16 @@ const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
             </div>
             {record.tip && (
               <div>
-                <Button onClick={showTipHandler}>{showTip ? "Hide Tip" : "Show Tip"}</Button>
+                <Button onClick={showTipHandler}>
+                  {showTip ? "Hide Tip" : "Show Tip"}
+                </Button>
                 {showTip && <p style={{ padding: "0px 10px" }}>{record.tip}</p>}
               </div>
             )}
             <div className="button-container">
-            <Button variant="contained" type="submit">Check Answer</Button>
+              <Button variant="contained" type="submit">
+                Check Answer
+              </Button>
             </div>
           </form>
           <br></br>

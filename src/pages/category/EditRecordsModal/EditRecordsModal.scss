@@ -1,0 +1,52 @@
+.button-container {
+    display: flex;
+    padding: 10px 5px;
+  }
+  .icon-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    p {
+      margin-left: 5px;
+    }
+  }
+  
+  .recordFormContainer {
+    display: flex;
+    width: 70%;
+    height: 70%;
+    background-color: whitesmoke;
+    justify-content: center;
+    border-radius: 10px;
+  
+    .edit-container {
+      width: 70%;
+      margin: 20px 0px;
+  
+      .question-answer-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+  
+        .input-container {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          padding: 10px;
+        }
+      }
+  
+      .tip-container {
+        padding: 10px;
+      }
+      
+      .button-container {
+        width: 100%;
+        display: flex;
+        padding: 10px;
+        justify-content: flex-end;
+        margin-top: 15px;
+      }
+    }
+  }
+  

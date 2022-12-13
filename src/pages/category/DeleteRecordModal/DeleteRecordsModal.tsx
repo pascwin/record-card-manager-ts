@@ -1,13 +1,14 @@
 import { useFirestore } from "../../../hooks/useFirestore";
-import { Modal } from "@mui/material";
+import { Button, Modal } from "@mui/material";
+import "./DeleteRecordModal.scss";
 
 const DeleteRecordsModal = ({ id, open, handleClose }: any) => {
   const { deleteDocument } = useFirestore("records");
 
   const deleteRecord = () => {
-    deleteDocument(id)
-    handleClose()
-  }
+    deleteDocument(id);
+    handleClose();
+  };
 
   return (
     <>
@@ -16,11 +17,33 @@ const DeleteRecordsModal = ({ id, open, handleClose }: any) => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         <div className="recordFormContainer">
-            <p>Do you want to delete this record?</p>
-          <button onClick={deleteRecord}>yes</button>
-          <button onClick={handleClose}>No</button>
+        <p>Do you want to delete this record?</p>
+          <div className="button-container">
+            <Button
+              variant="contained"
+              type="submit"
+              color="error"
+              onClick={deleteRecord}
+            >
+              Yes
+            </Button>
+            <br></br>
+            <Button
+              variant="contained"
+              type="submit"
+              onClick={handleClose}
+              style={{ marginLeft: "5px" }}
+            >
+              No
+            </Button>
+          </div>
         </div>
       </Modal>
     </>
