@@ -83,6 +83,7 @@ const RecordsTable = ({ category, uid }: any) => {
           seRecord={setRecordtoEdit}
           open={openEditModal}
           handleClose={handleCloseEditModal}
+          uid={uid}
         />
       )}
       <TableContainer component={Paper}>

@@ -1,19 +1,31 @@
 import { useState } from "react";
 import { useFirestore } from "../../../hooks/useFirestore";
-import { Button, Modal, TextField } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Modal,
+  TextField,
+  InputLabel,
+  MenuItem,
+} from "@mui/material";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import "./EditRecordsModal.scss";
+import { useCollection } from "../../../hooks/useCollection";
 
-const EditRecordsModal = ({ record, open, handleClose }: any) => {
+const EditRecordsModal = ({ record, open, handleClose, uid }: any) => {
   const { updateDocument } = useFirestore("records");
   const [question, setQuestion] = useState<any>(record.question);
   const [answer, setAnswer] = useState<any>(record.answer);
   const [tip, setTip] = useState<any>(record.tip);
+  const [category, setCategory] = useState<any>(record.category);
+  const { documents } = useCollection("categories", ["uid", "==", uid], [], []);
 
   const saveRecord = () => {
     updateDocument(record.id, {
       question: question,
       answer: answer,
       tip: tip,
+      category: category,
     });
     handleClose();
   };
@@ -28,6 +40,10 @@ const EditRecordsModal = ({ record, open, handleClose }: any) => {
 
   const onTipChange = (event: any) => {
     setTip(event.target.value);
+  };
+
+  const handleCategoryChange = (event: SelectChangeEvent) => {
+    setCategory(event.target.value as string);
   };
 
   return (
@@ -46,6 +62,30 @@ const EditRecordsModal = ({ record, open, handleClose }: any) => {
         <div className="recordFormContainer">
           {record && (
             <div className="edit-container">
+              {documents.length > 0 && (
+                <div style={{ padding: "10px" }}>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={category}
+                      label="Category"
+                      onChange={handleCategoryChange}
+                      style={{ backgroundColor: "white" }}
+                      required={true}
+                    >
+                      {documents?.map((category: any) => {
+                        return (
+                          <MenuItem key={category.name} value={category.name}>
+                            {category.name}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+              )}
               <div className="question-answer-container">
                 <div className="input-container">
                   <TextField
@@ -96,7 +136,12 @@ const EditRecordsModal = ({ record, open, handleClose }: any) => {
                   Skip
                 </Button>
                 <br></br>
-                <Button variant="contained" type="submit" onClick={saveRecord} style={{marginLeft: "5px"}}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  onClick={saveRecord}
+                  style={{ marginLeft: "5px" }}
+                >
                   Save
                 </Button>
               </div>
