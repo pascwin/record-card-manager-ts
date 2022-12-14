@@ -3,7 +3,7 @@ import { useFirestore } from "../../../hooks/useFirestore";
 
 const CategoriesForm = ({ uid }: any) => {
   const category = useRef<HTMLInputElement>(null);
-  const { addDocument, response } = useFirestore("categories");
+  const { addDocument } = useFirestore("categories");
 
   const addCategoryHandler = (event: any) => {
     event.preventDefault();
@@ -11,14 +11,13 @@ const CategoriesForm = ({ uid }: any) => {
       name: category.current?.value,
       uid: uid,
     });
-    console.log(response);
   };
 
   return (
     <div>
       <form>
         <input ref={category} />
-        <button onClick={addCategoryHandler}>Click me!</button>
+        <button onClick={addCategoryHandler}>Add Category</button>
       </form>
     </div>
   );

@@ -29,6 +29,7 @@ const MoreVert = (props: any) => {
   const handleClick =
     (newPlacement: PopperPlacementType) =>
     (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation()
       setAnchorEl(event.currentTarget);
       setPlacement(newPlacement);
       setOpen((prev) => !prev);
