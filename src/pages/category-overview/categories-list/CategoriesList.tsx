@@ -1,7 +1,7 @@
 import { useCollection } from "../../../hooks/useCollection";
 import { useNavigate } from "react-router-dom";
 import "./CategoriesList.scss";
-import MoreVert from "../../category/RecordsTable/MoreVert/MoreVert";
+// import MoreVert from "../../category/RecordsTable/MoreVert/MoreVert";
 
 const colors = ["#8A4695", "#469595", "#ADA343"];
 
@@ -23,7 +23,7 @@ const CategoriesList = ({ uid }: any) => {
           >
             <div className="first-row">
               <p>{document.name}</p>
-              <MoreVert />
+              {/* <MoreVert /> */}
             </div>
           </div>
         );
