@@ -9,7 +9,7 @@ import CategoryOverview from "./pages/category-overview/CategoryOverview";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import Category from "./pages/category/Category/Category";
-import Home from "./pages/home/Home";
+import Landing from "./pages/landing/Landing";
 
 // import { UserContext } from "./contexts/user-context";
 
@@ -24,11 +24,11 @@ const App = () => {
             <Routes>
               <Route
                 path="/"
-                element={user ? <Home /> : <Navigate to="/login" />}
+                element={user ? <Landing /> : <Navigate to="/login" />}
               />
               <Route
                 path="/home"
-                element={user ? <Home /> : <Navigate to="/login" />}
+                element={user ? <Landing /> : <Navigate to="/login" />}
               />
               <Route
                 path="/category"
