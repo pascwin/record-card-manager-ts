@@ -11,16 +11,63 @@
 
 .recordLearnFormContainer {
   display: flex;
-  width: 70%;
-  height: 70%;
+  width: 80%;
+  height: 80%;
   background-color: whitesmoke;
   justify-content: center;
   border-radius: 10px;
 
-  form {
+  .form {
     width: 70%;
     height: 60%;
-    margin: 50px 0px;
+    margin: 25px 0px;
+
+    .response-container {
+      padding: 12px 0px;
+      margin: 0px 10px 8px 10px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      background-color: lightgrey;
+
+      p {
+        color: grey;
+      }
+    }
+
+    .response-container-wrong {
+      padding: 12px 0px;
+      margin: 0px 10px 8px 10px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      background-color: lightcoral;
+
+      p {
+        color: red;
+      }
+    }
+
+    .response-container-correct {
+      padding: 12px 0px;
+      margin: 0px 10px 8px 10px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      background-color: lightgreen;
+
+      p {
+        color: green;
+      }
+    }
+
+    .buttons-container {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 20px;
+    }
 
     .button-container {
       display: flex;
@@ -51,7 +98,7 @@
         border: solid 1px;
         border-color: lightgrey;
         border-radius: 5px;
-        margin: 10px
+        margin: 10px;
       }
     }
   }
