@@ -1,0 +1,42 @@
+.button-container {
+  display: flex;
+  padding: 10px 5px;
+}
+.category-icon-container {
+  display: flex;
+  height: 100%;
+  p {
+    margin-left: 5px;
+  }
+}
+
+.category-form-container {
+  display: flex;
+  width: 40%;
+  height: 30%;
+  background-color: whitesmoke;
+  justify-content: center;
+  border-radius: 10px;
+
+  form {
+    width: 100%;
+    margin: 20px 0px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .input-container {
+      display: flex;
+      justify-content: center;
+      width: 80%;
+    }
+
+    .category-button-container {
+      display: flex;
+      width: 80%;
+      justify-content: flex-end;
+      margin-top: 25px;
+    }
+  }
+}
