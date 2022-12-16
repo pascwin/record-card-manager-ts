@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useFirestore } from "../../../hooks/useFirestore";
 import { Button, Modal, TextField } from "@mui/material";
 import "./RecordsLearnModal.scss";
