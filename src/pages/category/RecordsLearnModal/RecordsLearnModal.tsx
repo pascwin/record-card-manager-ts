@@ -167,7 +167,7 @@ const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
                       What should we do with this record?
                     </p>
                     <div className="buttons-container">
-                      {record.stage === "1" && (
+                      {record.stage !== 1 && (
                         <Button variant="contained" onClick={firstStageHandler}>
                           First Stage
                         </Button>
