@@ -14,15 +14,17 @@ const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
   );
   const [answerWrong, setAnswerWrong] = useState<boolean>(false);
   const [answerCorrect, setAnswerCorrect] = useState<boolean>(false);
+  const [textfieldDisabled, setTextfieldDisabled] = useState<boolean>(false)
 
   const checkAnswerHandler = async () => {
+    setTextfieldDisabled(true)
     if (answer === record.answer) {
       setResponseClass("response-container-correct");
       setResponseText("Yes! Your answer is correct :D")
       setAnswerCorrect(true);
     } else {
       setResponseClass("response-container-wrong");
-      setResponseText("Your answer is wrong :(");
+      setResponseText(`Your answer is wrong :(. Correct Answer: ${record.answer}`);
       setAnswerWrong(true);
     }
   };
@@ -32,14 +34,14 @@ const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
       stage: record.stage + 1,
       lastRepeat: getToday(),
     });
-    resetModal();
+    resetModalState();
   };
 
   const stayInStageHandler = () => {
     updateDocument(record.id, {
       lastRepeat: getToday(),
     });
-    resetModal();
+    resetModalState();
   };
 
   const firstStageHandler = () => {
@@ -47,7 +49,7 @@ const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
       stage: 1,
       lastRepeat: getToday(),
     });
-    resetModal();
+    resetModalState();
   };
 
   const handleOpen = () => {
@@ -57,7 +59,7 @@ const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
   const handleClose = () => {
     setOpen(false);
     setShowTip(false);
-    resetModal()
+    resetModalState()
   };
 
   const showTipHandler = () => {
@@ -70,13 +72,14 @@ const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
     setAnswer(event.target.value);
   };
 
-  const resetModal = () => {
+  const resetModalState = () => {
     setAnswerWrong(false);
     setAnswerCorrect(false);
     setResponseClass("response-container");
     setResponseText("Please write the correct answer");
     setAnswer("");
     setShowTip(false)
+    setTextfieldDisabled(false)
   };
 
   return (
@@ -120,6 +123,7 @@ const RecordsLearnModal = ({ record, getToday, learnCount }: any) => {
                   fullWidth={true}
                   required={true}
                   style={{ backgroundColor: "white" }}
+                  disabled={textfieldDisabled}
                 />
               </div>
             </div>
